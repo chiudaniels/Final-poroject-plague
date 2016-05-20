@@ -3,10 +3,11 @@ public class country{
   String name;
   PShape shape; 
   
-  country(float x,float y, String name){
+  country(float x,float y, String name, PShape z){
       x=this.x;
       y=this.y;
       name=this.name;
+      shape = z; 
   }
   void display (){
     fill(0,0,0);// Make green rgb 
