@@ -52,7 +52,6 @@ void setup() {
 }
 
 void draw() {
-  /*
   background(color(101, 182, 222));
   shape(australia,1250,575,175,175);
   fill(color(127,1, 10));
@@ -73,7 +72,7 @@ void draw() {
   shape(middleeast,900,280,350,250);
   fill(color(100, 100, 100));
   shape(iceland,500,40,160,200);
-  */
+  /*
   background(color(101, 182, 222));
   fill(color(250, int(random(255)), int (random(255))));
   shape(australia,1250,575,175,175);
@@ -90,7 +89,7 @@ void draw() {
   shape(middleeast,900,280,350,250);
   fill(color(250, int(random(255)), int (random(255))));  
   shape(iceland,500,40,160,200);
-  
+  */
 }
 /*
 void mousePressed(){
