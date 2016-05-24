@@ -6,42 +6,68 @@ public class Country{
   String name;
   PShape shape; 
   Disease disease;
+  boolean infected;
     
-  Country(float X,float Y, String Name, PShape z, int numNeighbors,int Width, int Length){
+  Country(float X,float Y, String Name, PShape z, int numNeighbors,int Width, int Length, boolean Infected){
       x= X;
       y= Y;
       name= Name;
       shape = z; 
       neighbors = new String[numNeighbors];
       spread = new int[Length][Width];
+      infected = Infected;
+      if(infected) {
+        spread[spread.length / 2][spread[1].length / 2] = 1;
+      }
   }
   void display (){
     fill(0,0,0);// Make green rgb 
     shape (shape,0,0); // this will be position of country  
   }
   void grow() {
-    int rand = int(random(4));
-    if(rand == 0) {
-      if(disease.infected * 1.5 > population) {
-        //spread to neighbors by probability;
+    if(infected) {
+      int rand = int(random(5));
+      if(rand == 1) {
+        spreadDisease();
       }
-      else {
-        disease.infected *= 1.5;
+      else if(rand == 2) {
+        increaseNum();
+      }
+      else if(rand == 3) {
+        decreaseNum();
+      }
+      else if(rand == 4) {
+        despreadDisease();
       }
     }
-   else if(rand == 1) {
-       if(disease.infected * 1.25 > population) {
-         //spread to neighbors by probablility;
-       }
-       else {
-         disease.infected *= 1.25;
-       }
-   }
-   else if(rand == 3) {
-       if(disease.infected < 10) {
-         disease.infected = 0;
-       }
-   }
+  }
+  void spreadDisease() {
+    for(int i = 0; i < spread.length; i++) {
+      for(int a = 0; a < spread[0].length; a++) {
+        if(spread[i][a] == 0) {
+        }
+      }
+    }
+  }
+  void despreadDisease() {
+  }
+  void increaseNum() {
+    for(int i = 0; i< spread.length; i++) {
+      for(int a = 0; a< spread[0].length; a++) {
+        if(spread[i][a] > 0) {
+          spread[i][a] = spread[i][a] + 1;
+        }
+      }
+    }
+  }
+  void decreaseNum() {
+    for(int i = 0; i< spread.length; i++) {
+      for(int a = 0; a< spread[0].length; a++) {
+        if(spread[i][a] > 0) {
+          spread[i][a] = spread[i][a] - 1;
+        }
+      }
+    }
   }
   void behavior() {
     grow();
