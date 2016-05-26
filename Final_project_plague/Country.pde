@@ -31,10 +31,10 @@ public class Country{
         spreadDisease();
       }
       else if(rand == 2) {
-        increaseNum();
+        contaminate();
       }
       else if(rand == 3) {
-        decreaseNum();
+        decontaminate();
       }
       else if(rand == 4) {
         despreadDisease();
@@ -45,29 +45,65 @@ public class Country{
     for(int i = 0; i < spread.length; i++) {
       for(int a = 0; a < spread[0].length; a++) {
         if(spread[i][a] == 0) {
+          if(surroundNeighbors(i, a)) {
+            spread[i][a] = 1;
+          }
         }
       }
     }
   }
   void despreadDisease() {
+    for(int i = 0; i < spread.length; i++) {
+      for(int a = 0; a < spread[0].length; a++) {
+        if(spread[i][a] == 0) {
+          if(surroundNeighbors(i, a)) {
+            spread[i][a] = -1;
+          }
+        }
+      }
+    }
   }
-  void increaseNum() {
+  void contaminate() {
     for(int i = 0; i< spread.length; i++) {
       for(int a = 0; a< spread[0].length; a++) {
-        if(spread[i][a] > 0) {
+        if(spread[i][a] != 0) {
           spread[i][a] = spread[i][a] + 1;
         }
       }
     }
   }
-  void decreaseNum() {
+  void decontaminate() {
     for(int i = 0; i< spread.length; i++) {
       for(int a = 0; a< spread[0].length; a++) {
-        if(spread[i][a] > 0) {
+        if(spread[i][a] != 0) {
           spread[i][a] = spread[i][a] - 1;
         }
       }
     }
+  }
+  boolean surroundNeighbors(int i, int a) {
+    boolean ret = true;
+    if(i > 0) {
+      if(spread[i - 1][a] > 0) {
+        return ret;
+      }
+    }
+    if(i < spread.length - 1) {
+      if(spread[i + 1][a] > 0) {
+        return ret;
+      }
+    }
+    if(a > 0) {
+      if(spread[i][a - 1] > 0) {
+        return ret;
+      }
+    }
+    if(a < spread[0].length - 1) {
+      if(spread[i][a + 1] > 0) {
+        return ret;
+      }
+    }
+    return false;
   }
   void behavior() {
     grow();
