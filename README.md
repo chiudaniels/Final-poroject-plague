@@ -34,7 +34,11 @@ Changelog:
 
 5-25 Brian: Starts implementing new grow method in the country class, using Daniel's 2D Array idea. 
 
-5-26 Brian: Finished basic grow method, might expand with more possibilities based on how the game plays. 
+5-26 Brian: Finished basic grow method, might expand with more possibilities based on how the game plays so it will be more balanced. 
 
-5-27 Brian: Started implementing neighbors function in Country class. Started making probability of spreading higher/game balancing. 
+5-26 Daniel: Resized map resolution and country places for school computer. 
+
+5-27 Brian: Started implementing neighbors function in Country class. Started making probability of spreading higher/game balancing. Also started population/getSum functions. 
+
+5-27 Daniel: Improved the setup and draw function, moving from PShapes to country class. 
 
