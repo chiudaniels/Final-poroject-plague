@@ -32,4 +32,8 @@ Changelog:
 
 5-24 Brian: Moves unnecessary methods of Disease over to that of the Country class.
 
-5-25 Brian: Starts implementing new grow method in the country class, using Daniel's 2D Array idea.    
+5-25 Brian: Starts implementing new grow method in the country class, using Daniel's 2D Array idea. 
+
+5-26 Brian: Finished basic grow method, might expand with more possibilities based on how the game plays. 
+
+5-27 Brian: Started implementing neighbors function in Country class. 
