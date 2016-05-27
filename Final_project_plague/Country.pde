@@ -26,11 +26,11 @@ public class Country{
   }
   void grow() {
     if(infected) {
-      int rand = int(random(5));
-      if(rand == 1) {
+      int rand = int(random(7));
+      if(rand == 1 || rand == 6) {
         spreadDisease();
       }
-      else if(rand == 2) {
+      else if(rand == 2 || rand == 5) {
         contaminate();
       }
       else if(rand == 3) {
@@ -113,4 +113,13 @@ public class Country{
       disease = null;
     }
   }
+  float getSum() {
+    float ret = 0;
+    for(int i = 0; i < spread.length; i++) {
+      for(int a = 0; a < spread[0].length; a++) {
+        ret += spread[i][a];
+      }
+    }
+    return ret;
+  }       
 }
