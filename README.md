@@ -36,4 +36,5 @@ Changelog:
 
 5-26 Brian: Finished basic grow method, might expand with more possibilities based on how the game plays. 
 
-5-27 Brian: Started implementing neighbors function in Country class. 
+5-27 Brian: Started implementing neighbors function in Country class. Started making probability of spreading higher/game balancing. 
+
