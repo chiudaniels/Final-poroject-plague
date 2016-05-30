@@ -1,99 +1,50 @@
 PImage world;
-PShape australia;
-PShape usa;
-PShape canada;
-PShape fareast;
-PShape europe;
-PShape iceland;
-PShape africa;
-PShape middleeast;
-PShape russia;
-PShape southamerica;
+Country australia;
+Country usa;
+Country canada;
+Country fareast;
+Country europe;
+Country iceland;
+Country africa;
+Country middleeast;
+Country russia;
+Country southamerica;
 int loopColor1 = 0;
 int loopColor2 = 120;
 int loopColor3 = 240;
 
 void setup() {
-    size(1600, 900);
-    world = loadImage("WorldMap.jpg");
-    background(color(101,182,222));
-    australia = loadShape("australia.svg");
-    usa = loadShape("USA.svg");
-    canada= loadShape("canada.svg");
-    fareast= loadShape("fareast.svg");
-    europe = loadShape("europe.svg");
-    iceland = loadShape("iceland.svg");
-    africa = loadShape("africa.svg");
-    middleeast= loadShape("middleeast.svg");
-    russia = loadShape("russia.svg");
-    southamerica = loadShape("southamerica.svg");
-    australia.disableStyle();
-    usa.disableStyle();
-    canada.disableStyle(); 
-    southamerica.disableStyle();
-    africa.disableStyle();
-    europe.disableStyle();
-    russia.disableStyle();
-    fareast.disableStyle();
-    middleeast.disableStyle();
-    iceland.disableStyle();
-    /*
-    australia.setFill(false);
-    usa.setFill(false);
-    canada.setFill(false);
-    southamerica.setFill(false);
-    africa.setFill(false);
-    europe.setFill(false);
-    russia.setFill(false);
-    fareast.setFill(false);
-    middleeast.setFill(false);
-    iceland.setFill(false);
-    */
+  size(1300, 800);
+  world = loadImage("WorldMap.jpg");
+  background(color(101,182,222));
+  australia = new Country(1250*(13./16.),575*(8./9.),175*(13./16.),175*(8./9.),"australia","australia.svg");
+  usa = new Country (170*(13./16.),280*(8./9.),285*(13./16.),200*(8./9.),"usa","USA.svg");
+  canada= new Country (30*(13./16.),30*(8./9.),460*(13./16.),300*(8./9.),"canada","canada.svg");
+  fareast= new Country (1090*(13./16.),300*(8./9.),310*(13./16.),170*(8./9.),"fareast","fareast.svg");
+  europe = new Country (740*(13./16.),120*(8./9.),215*(13./16.),275*(8./9.),"europe","europe.svg");
+  iceland = new Country (500*(13./16.),40*(8./9.),160*(13./16.),200*(8./9.),"iceland", "iceland.svg");
+  africa = new Country (700*(13./16.),390*(8./9.),300*(13./16.),350*(8./9.), "africa","africa.svg");
+  middleeast= new Country (900*(13./16.),280*(8./9.),350*(13./16.),250*(8./9.),"middleeast","middleeast.svg");
+  russia = new Country (910*(13./16.),50*(8./9.),675*(13./16.),290*(8./9.),"russia","russia.svg");
+  southamerica = new Country (380*(13./16.),470*(8./9.),200*(13./16.),330*(8./9.),"southamerica","southamerica.svg");
+
 }
 
 void draw() {
   background(color(101, 182, 222));
-  shape(australia,1250,575,175,175);
-  fill(color(127,1, 10));
-  shape(usa,170,280,285,200);
-  fill(color(320, 20, 1));
-  shape(canada,30,30,460,300);
-  fill(color(10, 320, 20));
-  shape(southamerica,380,470,200,330);
-  fill(color(10, 120, 120));
-  shape(africa,700,390,300,350);
-  fill(color(10, 120, 320));
-  shape(europe,740,120,215,300);
-  fill(color(10, 200, 120));
-  shape(russia,910,50,675,290);
-  fill(color(200, 120, 320));
-  shape(fareast,1090,300,310,170);
-  fill(color(120, 200, 320));
-  shape(middleeast,900,280,350,250);
-  fill(color(100, 100, 100));
-  shape(iceland,500,40,160,200);
-  /*
-  background(color(101, 182, 222));
-  fill(color(250, int(random(255)), int (random(255))));
-  shape(australia,1250,575,175,175);
-  fill(color(int(random(255)), 250, int(random(255))));
-  shape(usa,170,280,285,200);
-  shape(canada,30,30,460,300);
-  shape(southamerica,380,470,200,330);
-  fill(color(250, int(random(255)), int (random(255))));  
-  shape(africa,700,390,300,350);
-  fill(color(250, int(random(255)), int (random(255))));  
-  shape(europe,740,120,215,300);
-  shape(russia,910,50,675,290);
-  shape(fareast,1090,300,310,170);
-  shape(middleeast,900,280,350,250);
-  fill(color(250, int(random(255)), int (random(255))));  
-  shape(iceland,500,40,160,200);
-  */
+  australia.drawer();
+  usa.drawer();
+  canada.drawer();
+  fareast.drawer();
+  europe.drawer();
+  iceland.drawer();
+  africa.drawer();
+  middleeast.drawer();
+  russia.drawer();
+  
 }
-/*
+
 void mousePressed(){
   println("mouse pos X:" + mouseX);
   println("mouse pos Y:" + mouseY);
 }
-*/
