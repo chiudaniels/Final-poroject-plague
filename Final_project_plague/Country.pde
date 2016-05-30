@@ -52,6 +52,10 @@ public class Country{
   bcolor=b;
   }
  
+  void greenred(int percent){
+    setRGB((255*percent)/100, (255*(100-percent))/100,0);
+  }
+   
   void display (){
   fill(0,0,0);// Make green rgb
   shape (shape,0,0); // this will be position of country  

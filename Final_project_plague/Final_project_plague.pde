@@ -15,7 +15,6 @@ int loopColor3 = 240;
 
 void setup() {
   size(1300, 800);
-  world = loadImage("WorldMap.jpg");
   background(color(101,182,222));
   australia = new Country(1250*(13./16.),575*(8./9.),175*(13./16.),175*(8./9.),"australia","australia.svg");
   usa = new Country (170*(13./16.),280*(8./9.),285*(13./16.),200*(8./9.),"usa","USA.svg");
