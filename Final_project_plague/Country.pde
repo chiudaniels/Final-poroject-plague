@@ -41,14 +41,14 @@ public class Country{
    shape.disableStyle();
   }
 
-  void setRGB(int r,int g,int b){
-  rcolor=r;
-  gcolor=g;
-  bcolor=b;
+  void setRGB(float r,float g,float b){
+    rcolor = int(r);
+    gcolor = int(g);
+    bcolor = int(b);
   }
  
-  void greenred(int percent){
-    setRGB((255*percent)/100, (255*(100-percent))/100,0);
+  void greenred(float percent){
+    setRGB((255*percent), (255*(1.00-percent)),0);
   }
    
   void display (){ 
@@ -146,5 +146,14 @@ public class Country{
       disease = null;
     }
     */
+  }
+  float getPercentage() {
+    float ret = 0;
+    for(int i = 0; i < spread.length; i++) {
+      for(int a = 0; a < spread[0].length; a++) {
+        ret += spread[i][a];
+      }
+    }
+    return ret / 100.0 ;
   }
 }
