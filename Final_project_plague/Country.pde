@@ -40,12 +40,7 @@ public class Country{
    shape = loadShape(location);
    shape.disableStyle();
   }
- 
-  void drawer(){
-  shape(shape, xpos,ypos, xsize, ysize);
-  fill(color(rcolor,gcolor,bcolor));
-  }
- 
+
   void setRGB(int r,int g,int b){
   rcolor=r;
   gcolor=g;
@@ -56,63 +51,63 @@ public class Country{
     setRGB((255*percent)/100, (255*(100-percent))/100,0);
   }
    
-  void display (){
-  fill(0,0,0);// Make green rgb
-  shape (shape,0,0); // this will be position of country  
+  void display (){ 
+  shape(shape, xpos,ypos, xsize, ysize);
+  fill(color(rcolor,gcolor,bcolor));
   }
   void grow() {
   if(infected) {
     int rand = int(random(5));
     if(rand == 1) {
-      spreadDisease();
+      spreadDisease(1);
     }
     else if(rand == 2) {
-      contaminate();
+      contaminate(1);
     }
     else if(rand == 3) {
-      decontaminate();
+      decontaminate(1);
     }
     else if(rand == 4) {
-      despreadDisease();
+      despreadDisease(1);
     }
   }
   }
-  void spreadDisease() {
+  void spreadDisease (int amount) {
   for(int i = 0; i < spread.length; i++) {
     for(int a = 0; a < spread[0].length; a++) {
       if(spread[i][a] == 0) {
         if(surroundNeighbors(i, a)) {
-          spread[i][a] = 1;
+          spread[i][a] = amount;
         }
       }
     }
   }
   }
-  void despreadDisease() {
+  void despreadDisease(int amount) {
   for(int i = 0; i < spread.length; i++) {
     for(int a = 0; a < spread[0].length; a++) {
       if(spread[i][a] == 0) {
         if(surroundNeighbors(i, a)) {
-          spread[i][a] = -1;
+          spread[i][a] = amount * -1;
         }
       }
     }
   }
   }
-  void contaminate() {
+  void contaminate(int amount) {
   for(int i = 0; i< spread.length; i++) {
     for(int a = 0; a< spread[0].length; a++) {
       if(spread[i][a] != 0) {
-        spread[i][a] = spread[i][a] + 1;
+        spread[i][a] = spread[i][a] + amount;
       }
     }
   }
   }
-  void decontaminate() {
+  void decontaminate(int amount) {
   for(int i = 0; i< spread.length; i++) {
     for(int a = 0; a< spread[0].length; a++) {
       if(spread[i][a] != 0) {
-        spread[i][a] = spread[i][a] - 1;
+        spread[i][a] = spread[i][a] - amount;
       }
     }
   }
@@ -142,11 +137,14 @@ public class Country{
   return false;
   }
   void behavior() {
-  grow();
-  if(disease.infected >= population) {
-    population = 0;
-    disease.infected = 0;
-    disease = null;
-  }
+    display();
+    grow();
+    /*
+    if(disease.infected >= population) {
+      population = 0;
+      disease.infected = 0;
+      disease = null;
+    }
+    */
   }
 }
