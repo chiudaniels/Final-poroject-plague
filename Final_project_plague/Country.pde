@@ -9,14 +9,14 @@ public class Country{
   boolean infected=false;
   int rcolor,gcolor,bcolor;
  
-  Country(float X,float Y, String Name, int numNeighbors,int Width, int Length, float sizex, float sizey){
+  Country(float X,float Y, String Name, int numNeighbors, float sizex, float sizey){
     xpos= X;
     ypos= Y;
     xsize = sizex;
     ysize= sizey;
     name= Name;
     neighbors = new String[numNeighbors];
-    spread = new int[Length][Width];
+    spread = new int[10][10];
     if(infected) {
       spread[spread.length / 2][spread[1].length / 2] = 1;
     }
@@ -29,6 +29,8 @@ public class Country{
     ysize= sizey;
     name= Name;
     setShape(shapeloc);
+    spread = new int[10][10];
+    infected = true;
   }
  
  
@@ -64,12 +66,14 @@ public class Country{
     else if(rand == 2) {
       contaminate(1);
     }
+    /*
     else if(rand == 3) {
       decontaminate(1);
     }
     else if(rand == 4) {
       despreadDisease(1);
     }
+    */
   }
   }
   void spreadDisease (int amount) {
@@ -137,8 +141,10 @@ public class Country{
   return false;
   }
   void behavior() {
-    display();
     grow();
+    greenred(getPercentage());
+    print(getPercentage());
+    display();
     /*
     if(disease.infected >= population) {
       population = 0;
@@ -155,5 +161,8 @@ public class Country{
       }
     }
     return ret / 100.0 ;
+  }
+  int getInfected() {
+    return int(getPercentage() * population);
   }
 }

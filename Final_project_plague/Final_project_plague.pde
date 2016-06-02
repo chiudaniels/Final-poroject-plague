@@ -55,6 +55,7 @@ void draw() {
   middleeast.display();
   russia.display();
   southamerica.display();
+  delay(500);
   if(countryIndex == 10) {
     countryIndex = 0;
   }
