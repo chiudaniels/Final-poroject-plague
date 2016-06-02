@@ -1,3 +1,5 @@
+import g4p_controls.*;
+
 ArrayList <Country> Countries;
 PImage world;
 Country australia;
@@ -11,6 +13,8 @@ Country middleeast;
 Country russia;
 Country southamerica;
 int countryIndex;
+GWindow window;
+
 void setup() {
   Countries = new ArrayList<Country>();
   size(1300, 800);
@@ -36,6 +40,7 @@ void setup() {
   Countries.add(russia);
   Countries.add(southamerica);
   countryIndex = 0;
+  window= GWindow.getWindow(this,"My Window",100,100,1001,1001,JAVA2D);
 }
 
 void draw() {
@@ -55,7 +60,15 @@ void draw() {
   }
   Countries.get(countryIndex).behavior();
   countryIndex++;
+  window.addDrawHandler(this, "windowDraw");
 }
+public void windowDraw(PApplet app, GWinData data){
+    app.background(255);
+    app.strokeWeight(2);
+    // draw black line to current mouse position
+    app.stroke(0);
+    app.line(app.width / 2, app.height/2, app.mouseX, app.mouseY);
+  }
 
 void mousePressed(){
   println("mouse pos X:" + mouseX);
