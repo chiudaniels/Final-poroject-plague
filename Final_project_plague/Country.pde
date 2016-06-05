@@ -73,7 +73,7 @@ public class Country{
     if(rand == 1 || rand == 6) {
       spreadDisease(transmissionOut);
     }
-    else if(rand == 2 || rand == 7 || rand == 9 || rand == 8) {
+    else if(rand == 2 || rand == 7 || rand == 9) {
       contaminate(transmissionIn);
     }
     else if(rand == 3) {
@@ -83,8 +83,9 @@ public class Country{
       despreadDisease(immunity);
     }
     else if(rand == 5) {
-      kill(lethality);
-  }
+      //kill(lethality);
+    }
+    
   }
   }
   void spreadDisease (int amount) {
@@ -186,7 +187,7 @@ public class Country{
         ret += spread[i][a];
       }
     }
-    return ret / 100.0 ;
+    return ret / 1000.0;
   }
   int getInfected() {
     return int(getPercentage() * population);
