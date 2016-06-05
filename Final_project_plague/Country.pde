@@ -55,6 +55,7 @@ public class Country{
    
   void display (){ 
   shape(shape, xpos,ypos, xsize, ysize);
+  greenred(getPercentage());
   fill(color(rcolor,gcolor,bcolor));
   }
   void grow() {
@@ -143,8 +144,8 @@ public class Country{
   void behavior() {
     grow();
     greenred(getPercentage());
-    print(getPercentage());
-    display();
+    //print(getPercentage());
+    //display();
     /*
     if(disease.infected >= population) {
       population = 0;
