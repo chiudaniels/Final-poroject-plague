@@ -5,9 +5,12 @@ public class Country{
   float xpos,ypos,xsize,ysize;
   String name;
   PShape shape;
-  Disease disease;
+  int lethality;
+  int transmissionOut;
+  int transmissionIn;
   boolean infected=false;
   int rcolor,gcolor,bcolor;
+  int immunity; 
  
   Country(float X,float Y, String Name, int numNeighbors, float sizex, float sizey){
     xpos= X;
@@ -17,6 +20,10 @@ public class Country{
     name= Name;
     neighbors = new String[numNeighbors];
     spread = new int[10][10];
+    lethality = 1;
+    transmissionIn = 1;
+    transmissionOut = 1;
+    immunity = 1;
     if(infected) {
       spread[spread.length / 2][spread[1].length / 2] = 1;
     }
@@ -31,9 +38,11 @@ public class Country{
     setShape(shapeloc);
     spread = new int[10][10];
     infected = true;
+    lethality = 1;
+    transmissionIn = 1;
+    transmissionOut = 1;
+    immunity = 1;
   }
- 
- 
   void setInfected(boolean x){
   infected=x;
   }
@@ -60,21 +69,22 @@ public class Country{
   }
   void grow() {
   if(infected) {
-    int rand = int(random(5));
-    if(rand == 1) {
-      spreadDisease(1);
+    int rand = int(random(10));
+    if(rand == 1 || rand == 6) {
+      spreadDisease(transmissionOut);
     }
-    else if(rand == 2) {
-      contaminate(1);
+    else if(rand == 2 || rand == 7 || rand == 9 || rand == 8) {
+      contaminate(transmissionIn);
     }
-    /*
     else if(rand == 3) {
-      decontaminate(1);
+      decontaminate(immunity);
     }
     else if(rand == 4) {
-      despreadDisease(1);
+      despreadDisease(immunity);
     }
-    */
+    else if(rand == 5) {
+      kill(lethality);
+  }
   }
   }
   void spreadDisease (int amount) {
@@ -93,7 +103,7 @@ public class Country{
     for(int a = 0; a < spread[0].length; a++) {
       if(spread[i][a] == 0) {
         if(surroundNeighbors(i, a)) {
-          spread[i][a] = amount * -1;
+          spread[i][a] = (amount * -1);
         }
       }
     }
@@ -117,25 +127,40 @@ public class Country{
     }
   }
   }
+  void kill(int Lethality) {
+    if(population > 100000) {
+    population /= Lethality;
+    lethality --;
+    transmissionIn --;
+    transmissionOut --;
+    }
+    else {
+      population -= 10000;
+      lethality --;
+      transmissionIn --;
+      transmissionOut --;
+    }
+  }
+    
   boolean surroundNeighbors(int i, int a) {
   boolean ret = true;
   if(i > 0) {
-    if(spread[i - 1][a] > 0) {
+    if(spread[i - 1][a] == 0) {
       return ret;
     }
   }
   if(i < spread.length - 1) {
-    if(spread[i + 1][a] > 0) {
+    if(spread[i + 1][a] == 0) {
       return ret;
     }
   }
   if(a > 0) {
-    if(spread[i][a - 1] > 0) {
+    if(spread[i][a - 1] == 0) {
       return ret;
     }
   }
   if(a < spread[0].length - 1) {
-    if(spread[i][a + 1] > 0) {
+    if(spread[i][a + 1] == 0) {
       return ret;
     }
   }

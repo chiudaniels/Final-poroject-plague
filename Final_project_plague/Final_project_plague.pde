@@ -41,6 +41,26 @@ void setup() {
   Countries.add(russia);
   Countries.add(southamerica);
   countryIndex = 0;
+  String[] australiaNeighbors = {"usa", "fareast", "southamerica"};
+  String[] usaNeighbors = {"canada", "southamerica", "australia", "europe"};   
+  String[] canadaNeighbors = {"usa", "greenland"};
+  String[] fareastNeighbors = {"russia", "middleeast", "australia"};
+  String[] europeNeighbors = {"usa", "middleeast", "russia", "africa"};
+  String[] greenlandNeighbors = {"canada", "usa"};
+  String[] africaNeighbors = {"europe", "middleeast", "southamerica"};
+  String[] middleeastNeighbors = {"fareast", "russia", "europe", "africa"};
+  String[] russiaNeighbors = {"europe", "fareast", "middleeast"};
+  String[] southamericaNeighbors = {"usa", "africa", "australia"};
+  australia.neighbors = australiaNeighbors;
+  usa.neighbors = usaNeighbors;
+  canada.neighbors = canadaNeighbors;
+  fareast.neighbors = fareastNeighbors;
+  europe.neighbors = europeNeighbors;
+  greenland.neighbors = greenlandNeighbors;
+  africa.neighbors = africaNeighbors;
+  middleeast.neighbors = middleeastNeighbors;
+  russia.neighbors = russiaNeighbors;
+  southamerica.neighbors = southamericaNeighbors;
   window= GWindow.getWindow(this,"My Window",100,100,500,500,JAVA2D);
 }
 
@@ -66,15 +86,42 @@ void draw() {
   ellipse(390,520,25,25);    
   ellipse(475,115,25,25);
   ellipse(700,465,25,25);
-  delay(500);
+  delay(1000);
   if(countryIndex == 10) {
   countryIndex = 0;
   }
   //selectCountry();
   Countries.get(countryIndex).behavior();
+  println(Countries.get(countryIndex).getPercentage());
+  infectOthers(Countries.get(countryIndex));
   countryIndex++;
-  window.addDrawHandler(this, "windowDraw");
-  
+  window.addDrawHandler(this, "windowDraw");  
+}
+void infectOthers(Country country) { 
+  int totalSide1 = 0;
+  int totalSide2 = 0;
+  int totalSide3 = 0;
+  int totalSide4= 0;
+  for(int i = 0; i < country.spread.length; i++) {
+    totalSide1 += country.spread[0][i];
+    totalSide2 += country.spread[i][country.spread[0].length - 1];
+    totalSide3 += country.spread[country.spread.length - 1][i];
+    totalSide4 += country.spread[i][0];   
+  }
+  if(totalSide1 > 40 || totalSide2 > 40 || totalSide3 > 40 || totalSide4 > 40){
+    int i = 0;
+    boolean temp = true;
+    while(i < country.neighbors.length && temp) {
+      int a = 0;
+      while(a < Countries.size() && temp) {
+        if(!(Countries.get(a).infected) && country.neighbors[i].equals(Countries.get(a).name)) {
+          temp = false;
+        }
+        a++;
+      }
+      i++;
+    }
+  }
 }
 public void windowDraw(PApplet app, GWinData data){
   app.background(0);
