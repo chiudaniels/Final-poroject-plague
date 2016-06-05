@@ -12,7 +12,7 @@ public class Disease{
         location = Location;
     }
     void display() {
-      //ask countries with name == location to display red;
+	//ask countries with name == location to display red;
     }
 }
       
