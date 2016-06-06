@@ -71,6 +71,8 @@ void setup() {
 
 void draw() {
   if(!started) {
+    started = true;
+    //if(mouseX 
     //mouseclick on country, set infected = true;
   }
   if(selection==1){
@@ -182,11 +184,13 @@ void infectOthers(Country country) {
       while(a < Countries.size() && temp) {
         if(!(Countries.get(a).infected) && country.neighbors[i].equals(Countries.get(a).name)) {
           temp = false;
+          Countries.get(a).infected = true;
         }
         a++;
       }
       i++;
     }
+      
   }
 }
 
@@ -197,7 +201,7 @@ public void windowDraw(PApplet app, GWinData data){
       app.text("Area:",50,100);
       app.text("Infected:",50,150);
       app.text("Population:",50,200);
-      app.text("Fatality:",50,250);
+      //app.text("Fatality:",50,250);
       switch(selectedCountry){
       case 1: 
         app.text(australia.getName(),150,100);

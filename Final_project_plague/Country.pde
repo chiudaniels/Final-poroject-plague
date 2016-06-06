@@ -1,7 +1,7 @@
 public class Country{
   String[] neighbors;
   float[][] spread;
-  int population;
+  float population;
   float xpos,ypos,xsize,ysize;
   String name;
   PShape shape;
@@ -25,7 +25,7 @@ public class Country{
     transmissionOut = 1;
     immunity = 1;
     if(infected) {
-      spread[spread.length / 2][spread[1].length / 2] = 1;
+      spread[(spread.length / 2) - 1][(spread[1].length / 2 ) - 1] = 1;
     }
   }
  
@@ -43,6 +43,9 @@ public class Country{
     transmissionOut = 1;
     immunity = 1;
     infected = isInfected;
+    if(infected) {
+      spread[(spread.length / 2) - 1][(spread[1].length / 2 ) - 1] = 1;
+    }
   }
   void setInfected(boolean x){
   infected=x;
@@ -70,6 +73,9 @@ public class Country{
   }
   void grow() {
   if(infected) {
+    if(spread[(spread.length / 2) - 1][(spread[0].length / 2) - 1] == 0) {
+      spread[spread.length / 2][spread[0].length / 2] = 1;
+    }
     int rand = int(random(10));
     if(rand == 1 || rand == 6) {
       spreadDisease(transmissionOut);
@@ -129,21 +135,12 @@ public class Country{
     }
   }
   }
+  /*
   void kill(int Lethality) {
-    if(population > 100000) {
-    population /= Lethality;
-    lethality --;
-    transmissionIn --;
-    transmissionOut --;
-    }
-    else {
-      population -= 10000;
-      lethality --;
-      transmissionIn --;
-      transmissionOut --;
-    }
+    float percentage = Lethality * 1.0 / 10;
+    population -= getInfected() * percentage;
   }
-    
+  */
   boolean surroundNeighbors(int i, int a) {
   boolean ret = true;
   if(i > 0) {
@@ -190,10 +187,10 @@ public class Country{
     }
     return ret / 1000.0;
   }
-  int getInfected() {
+  float getInfected() {
     return int(getPercentage() * population);
   }
-  int getPopulation(){
+  float getPopulation(){
     return population;
   }
   String getName(){
