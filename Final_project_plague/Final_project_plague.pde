@@ -15,6 +15,10 @@ Country southamerica;
 int countryIndex;
 GWindow window;
 int selectedCountry=0;
+int selection=1;
+int lethality;
+int transmissionOut;
+int transmissionIn;
 
 void setup() {
   Countries = new ArrayList<Country>();
@@ -61,42 +65,100 @@ void setup() {
   middleeast.neighbors = middleeastNeighbors;
   russia.neighbors = russiaNeighbors;
   southamerica.neighbors = southamericaNeighbors;
-  window= GWindow.getWindow(this,"My Window",100,100,500,500,JAVA2D);
+  window= GWindow.getWindow(this,"My Window",100,100,600,500,JAVA2D);
 }
 
 void draw() {
-  background(color(101, 182, 222));
-  australia.display();
-  usa.display();
-  canada.display();
-  fareast.display();
-  europe.display();
-  greenland.display();
-  africa.display();
-  middleeast.display();
-  russia.display();
-  southamerica.display();
-  ellipse(1095,580,25,25);
-  ellipse(235,300,25,25);
-  ellipse(210,175,25,25);
-  ellipse(990,335,25,25);
-  ellipse(700,280,25,25);
-  ellipse(855,355,25,25);
-  ellipse(970,200,25,25);
-  ellipse(390,520,25,25);    
-  ellipse(475,115,25,25);
-  ellipse(700,465,25,25);
-  delay(1000);
+  if(selection==1){
+    background(color(101, 182, 222));
+    australia.display();
+    usa.display();
+    canada.display();
+    fareast.display();
+    europe.display();
+    greenland.display();
+    africa.display();
+    middleeast.display();
+    russia.display();
+    southamerica.display();
+    australia.display();
+    ellipse(1095,580,25,25);
+    ellipse(235,300,25,25);
+    ellipse(210,175,25,25);
+    ellipse(990,335,25,25);
+    ellipse(700,280,25,25);
+    ellipse(855,355,25,25);
+    ellipse(970,200,25,25);
+    ellipse(390,520,25,25);    
+    ellipse(475,115,25,25);
+    ellipse(700,465,25,25);
+    delay(1000);
+  }
+  if (selection == 2){
+    background(color(101, 182, 222));
+    upgradescreen();
+  }
   if(countryIndex == 10) {
   countryIndex = 0;
   }
   //selectCountry();
   Countries.get(countryIndex).behavior();
-  println(Countries.get(countryIndex).getPercentage());
+  //println(Countries.get(countryIndex).getPercentage());
   infectOthers(Countries.get(countryIndex));
   countryIndex++;
-  window.addDrawHandler(this, "windowDraw");  
+  window.addDrawHandler(this, "windowDraw");
+  rect(1150,730,100,40);
 }
+
+void upgradescreen(){
+    textSize(28);
+    text("Transmission in country", 50,50); 
+    rect(50,70,170,50);
+    rect(250,70,170,50);
+    rect(450,70,170,50);
+    rect(650,70,170,50);
+    text("Transmission in Animals", 50,200); 
+    rect(50,70+150,170,50);
+    rect(250,70+150,170,50);
+    rect(450,70+150,170,50);
+    rect(650,70+150,170,50);
+    text("Letality", 50,350); 
+    rect(50,370,170,50);
+    rect(250,370,170,50);
+    rect(450,370,170,50);
+    rect(650,370,170,50);
+}
+
+void upgradescreenclick(){
+  if (transmissionIn == 1 && mouseX <= 250 && mouseX >=50+170 && mouseY>=70 && mouseY<=50+70){
+    transmissionIn++;
+  }
+  if (transmissionIn == 2 && mouseX <= 450 && mouseX >=450+170 && mouseY>=70 && mouseY<=50+70){
+    transmissionIn++;
+  }
+  if (transmissionIn == 3 && mouseX <= 650 && mouseX >=650+170 && mouseY>=70 && mouseY<=50+70){
+    transmissionIn++;
+  }
+  if (transmissionOut == 1 && mouseX <= 250 && mouseX >=50+170 && mouseY>=220 && mouseY<=220+50){
+    transmissionOut++;
+  }
+  if (transmissionOut == 2 && mouseX <= 450 && mouseX >=450+170 && mouseY>=220 && mouseY<=220+50){
+    transmissionOut++;
+  }
+  if (transmissionOut == 3 && mouseX <= 650 && mouseX >=650+170 && mouseY>=220 && mouseY<=220+50){
+    transmissionOut++;
+  }
+  if (lethality == 1 && mouseX <= 250 && mouseX >=50+170 && mouseY>=370 && mouseY<=370+50){
+    transmissionOut++;
+  }
+  if (lethality == 2 && mouseX <= 450 && mouseX >=450+170 && mouseY>=370 && mouseY<=370+50){
+    transmissionOut++;
+  }
+  if (lethality == 3 && mouseX <= 650 && mouseX >=650+170 && mouseY>=370 && mouseY<=370+50){
+    transmissionIn++;
+  }
+}
+
 void infectOthers(Country country) { 
   int totalSide1 = 0;
   int totalSide2 = 0;
@@ -123,76 +185,121 @@ void infectOthers(Country country) {
     }
   }
 }
+
 public void windowDraw(PApplet app, GWinData data){
   app.background(0);
   app.fill(255);
-  app.textSize(32);
-  app.text("Area:",50,100);
-  app.text("Infected:",50,150);
-  app.text("Population:",50,200);
-  if (selectedCountry==1){
-  }
-  if (selectedCountry==2){
-  }
-  if (selectedCountry==3){
-  }
-  if (selectedCountry==4){
-  }
-  if (selectedCountry==5){
-  }
-  if (selectedCountry==6){
-  }
-  if (selectedCountry==7){
-  }
-  if (selectedCountry==8){
-  }
-  if (selectedCountry==9){
-  }
-  if (selectedCountry==10){
+      app.textSize(32);
+      app.text("Area:",50,100);
+      app.text("Infected:",50,150);
+      app.text("Population:",50,200);
+      app.text("Fatality:",50,250);
+      switch(selectedCountry){
+      case 1: 
+        app.text(australia.getName(),150,100);
+        app.text(australia.getInfected(),200,150);
+        app.text(australia.getPopulation(),250,200);
+        break;
+      case 2: 
+        app.text(usa.getName(),150,100);
+        app.text(usa.getInfected(),200,150);
+        app.text(usa.getPopulation(),250,200);
+        break;
+      case 3:
+        app.text(canada.getName(),150,100);
+        app.text(canada.getInfected(),200,150);
+        app.text(canada.getPopulation(),250,200);
+        break;
+      case 4:
+       app.text(fareast.getName(),150,100);
+        app.text(fareast.getInfected(),200,150);
+        app.text(fareast.getPopulation(),250,200);
+        break;
+      case 5:
+       app.text(europe.getName(),150,100);
+        app.text(europe.getInfected(),200,150);
+        app.text(europe.getPopulation(),250,200);
+        break;
+      case 6:
+        app.text(greenland.getName(),150,100);
+        app.text(greenland.getInfected(),200,150);
+        app.text(greenland.getPopulation(),250,200);
+        break;
+      case 7:
+        app.text(africa.getName(),150,100);
+        app.text(africa.getInfected(),200,150);
+        app.text(africa.getPopulation(),250,200);
+        break;
+      case 8:
+       app.text(middleeast.getName(),150,100);
+        app.text(middleeast.getInfected(),200,150);
+        app.text(middleeast.getPopulation(),250,200);
+        break;
+      case 9:
+        app.text(russia.getName(),150,100);
+        app.text(russia.getInfected(),200,150);
+        app.text(russia.getPopulation(),250,200);
+        break;
+      case 10:
+        app.text(southamerica.getName(),150,100);
+        app.text(southamerica.getInfected(),200,150);
+        app.text(southamerica.getPopulation(),250,200);
+        break;
   }
 }
 
 void mousePressed(){
-  if((mouseX>=1095-25 && mouseX<=1095+25) && (mouseY>=580-25 && mouseY<=580+25)){
-    selectedCountry=1;
-    //australia
+  if (selection == 1){
+    if((mouseX>=1095-25 && mouseX<=1095+25) && (mouseY>=580-25 && mouseY<=580+25)){
+      selectedCountry=1;
+      //australia
+    }
+    else if((mouseX>=235-25 && mouseX<=235+25) && (mouseY>=300-25 && mouseY<=300+25)){
+      selectedCountry=2;
+      //usa
+    }
+    else if((mouseX>=200-25 && mouseX<=200+25) && (mouseY>=175-25 && mouseY<=175+25)){
+      selectedCountry=3;
+      //canada
+    }
+    else if((mouseX>=990-25 && mouseX<=990+25) && (mouseY>=335-25 && mouseY<=335+25)){
+      selectedCountry=4;
+      //fareast
+    }
+    else if((mouseX>=700-25 && mouseX<=700+25) && (mouseY>=280-25 && mouseY<=280+25)){
+      selectedCountry=5;
+      //europe
+    }
+    else if((mouseX>=475-25 && mouseX<=475+25) && (mouseY>=115-25 && mouseY<=115+25)){
+      selectedCountry=6;
+      //greenland
+    }
+    else if((mouseX>=700-25 && mouseX<= 700+25) && (mouseY>=465-25 && mouseY<=465+25)){
+      selectedCountry=7;
+      //africa
+    }
+    else if((mouseX>=850-25 && mouseX<=850+25 ) && (mouseY>=355-25 && mouseY<=355+25)){
+      selectedCountry=8;
+      //middleeast
+    }
+    else if((mouseX>=970-25 && mouseX<=970+25) && (mouseY>=200-25 && mouseY<=200+25)){
+      selectedCountry=9;
+      //russia
+    }
+    else if((mouseX>=390-25 && mouseX<=390+25) && (mouseY>=520-25 && mouseY<=520+25)){
+      selectedCountry=10;
+      //southamerica
+    } 
+    else if((mouseX>=1150 && mouseX<=1150+100) && (mouseY>=730 && mouseY<=730+50)){
+      selection=2;
+    }
   }
-  else if((mouseX>=235-25 && mouseX<=235+25) && (mouseY>=300-25 && mouseY<=300+25)){
-    selectedCountry=2;
-    //usa
+  else if (selection==2){
+    upgradescreenclick();
+    if((mouseX>=1150 && mouseX<=1150+100) && (mouseY>=730 && mouseY<=730+50)){
+      selection=1;
+    }
   }
-  else if((mouseX>=200-25 && mouseX<=200+25) && (mouseY>=175-25 && mouseY<=175+25)){
-    selectedCountry=3;
-    //canada
-  }
-  else if((mouseX>=990-25 && mouseX<=990+25) && (mouseY>=335-25 && mouseY<=335+25)){
-    selectedCountry=4;
-    //fareast
-  }
-  else if((mouseX>=700-25 && mouseX<=700+25) && (mouseY>=280-25 && mouseY<=280+25)){
-    selectedCountry=5;
-    //europe
-  }
-  else if((mouseX>=475-25 && mouseX<=475+25) && (mouseY>=115-25 && mouseY<=115+25)){
-    selectedCountry=6;
-    //greenland
-  }
-  else if((mouseX>=700-25 && mouseX<= 700+25) && (mouseY>=465-25 && mouseY<=465+25)){
-    selectedCountry=7;
-    //africa
-  }
-  else if((mouseX>=850-25 && mouseX<=850+25 ) && (mouseY>=355-25 && mouseY<=355+25)){
-    selectedCountry=8;
-    //middleeast
-  }
-  else if((mouseX>=970-25 && mouseX<=970+25) && (mouseY>=200-25 && mouseY<=200+25)){
-    selectedCountry=9;
-    //russia
-  }
-  else if((mouseX>=390-25 && mouseX<=390+25) && (mouseY>=520-25 && mouseY<=520+25)){
-    selectedCountry=10;
-    //southamerica
-  } 
   println("mouse pos X:" + mouseX);
   println("mouse pos Y:" + mouseY);
   println("selectedCountry:" + selectedCountry);

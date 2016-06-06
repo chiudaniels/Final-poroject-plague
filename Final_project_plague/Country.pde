@@ -1,6 +1,6 @@
 public class Country{
   String[] neighbors;
-  int[][] spread;
+  float[][] spread;
   int population;
   float xpos,ypos,xsize,ysize;
   String name;
@@ -19,7 +19,7 @@ public class Country{
     ysize= sizey;
     name= Name;
     neighbors = new String[numNeighbors];
-    spread = new int[10][10];
+    spread = new float[10][10];
     lethality = 1;
     transmissionIn = 1;
     transmissionOut = 1;
@@ -36,7 +36,7 @@ public class Country{
     ysize= sizey;
     name= Name;
     setShape(shapeloc);
-    spread = new int[10][10];
+    spread = new float[10][10];
     infected = true;
     lethality = 1;
     transmissionIn = 1;
@@ -191,5 +191,11 @@ public class Country{
   }
   int getInfected() {
     return int(getPercentage() * population);
+  }
+  int getPopulation(){
+    return population;
+  }
+  String getName(){
+    return name;
   }
 }
