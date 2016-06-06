@@ -29,7 +29,7 @@ public class Country{
     }
   }
  
-  Country(float X,float Y,float sizex, float sizey, String Name,String shapeloc){
+  Country(float X,float Y,float sizex, float sizey, String Name,String shapeloc, boolean isInfected){
     xpos= X;
     ypos= Y;
     xsize = sizex;
@@ -42,6 +42,7 @@ public class Country{
     transmissionIn = 1;
     transmissionOut = 1;
     immunity = 1;
+    infected = isInfected;
   }
   void setInfected(boolean x){
   infected=x;
@@ -113,7 +114,7 @@ public class Country{
   void contaminate(int amount) {
   for(int i = 0; i< spread.length; i++) {
     for(int a = 0; a< spread[0].length; a++) {
-      if(spread[i][a] != 0) {
+      if(spread[i][a] != 0 && spread[i][a] < 10) {
         spread[i][a] = spread[i][a] + amount;
       }
     }
@@ -122,7 +123,7 @@ public class Country{
   void decontaminate(int amount) {
   for(int i = 0; i< spread.length; i++) {
     for(int a = 0; a< spread[0].length; a++) {
-      if(spread[i][a] != 0) {
+      if(spread[i][a] != 0 && spread[i][a] > -10) {
         spread[i][a] = spread[i][a] - amount;
       }
     }
