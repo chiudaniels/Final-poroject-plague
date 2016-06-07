@@ -25,16 +25,16 @@ void setup() {
   Countries = new ArrayList<Country>();
   size(1300, 800);
   background(color(101,182,222));
-  australia = new Country(1250*(13./16.),575*(8./9.),175*(13./16.),175*(8./9.),"australia","australia.svg", false);
-  usa = new Country (170*(13./16.),280*(8./9.),285*(13./16.),200*(8./9.),"usa","USA.svg", false);
-  canada= new Country (0*(13./16.),25*(8./9.),500*(13./16.),300*(8./9.),"canada","canada.svg", false);
-  fareast= new Country (1090*(13./16.),300*(8./9.),310*(13./16.),170*(8./9.),"fareast","fareast.svg", false);
-  europe = new Country (740*(13./16.),120*(8./9.),215*(13./16.),275*(8./9.),"europe","europe.svg", false);
-  greenland = new Country (500*(13./16.),40*(8./9.),160*(13./16.),200*(8./9.),"greenland", "greenland.svg", false);
-  africa = new Country (700*(13./16.),390*(8./9.),300*(13./16.),350*(8./9.), "africa","africa.svg", false);
-  middleeast= new Country (900*(13./16.),280*(8./9.),350*(13./16.),250*(8./9.),"middleeast","middleeast.svg", false);
-  russia = new Country (910*(13./16.),50*(8./9.),675*(13./16.),290*(8./9.),"russia","russia.svg", false);
-  southamerica = new Country (380*(13./16.),470*(8./9.),200*(13./16.),330*(8./9.),"southamerica","southamerica.svg", false);
+  australia = new Country(1250*(13./16.),575*(8./9.),175*(13./16.),175*(8./9.),"australia","australia.svg", false, 23130900);
+  usa = new Country (170*(13./16.),280*(8./9.),285*(13./16.),200*(8./9.),"usa","USA.svg", false, 316128839);
+  canada= new Country (0*(13./16.),25*(8./9.),500*(13./16.),300*(8./9.),"canada","canada.svg", false, 35158304);
+  fareast= new Country (1090*(13./16.),300*(8./9.),310*(13./16.),170*(8./9.),"fareast","fareast.svg", false, 2064752597);
+  europe = new Country (740*(13./16.),120*(8./9.),215*(13./16.),275*(8./9.),"europe","europe.svg", false, 742500000);
+  greenland = new Country (500*(13./16.),40*(8./9.),160*(13./16.),200*(8./9.),"greenland", "greenland.svg", false, 56483);
+  africa = new Country (700*(13./16.),390*(8./9.),300*(13./16.),350*(8./9.), "africa","africa.svg", false, 1110000000);
+  middleeast= new Country (900*(13./16.),280*(8./9.),350*(13./16.),250*(8./9.),"middleeast","middleeast.svg", false, 205000000);
+  russia = new Country (910*(13./16.),50*(8./9.),675*(13./16.),290*(8./9.),"russia","russia.svg", false, 160369925);
+  southamerica = new Country (380*(13./16.),470*(8./9.),200*(13./16.),330*(8./9.),"southamerica","southamerica.svg", false, 387500000);
   Countries.add(australia);
   Countries.add(usa);
   Countries.add(canada);
@@ -97,7 +97,15 @@ void draw() {
     ellipse(475,115,25,25);
     ellipse(700,465,25,25);
     //countryborder();
-    delay(1000);
+  if(countryIndex == 10) {
+  countryIndex = 0;
+  }
+  //selectCountry();
+  Countries.get(countryIndex).behavior();
+  //println(Countries.get(countryIndex).getPercentage());
+  infectOthers(Countries.get(countryIndex));
+  countryIndex++;
+    delay(500);
     textSize(18);
     fill(color(128,128,128));
     rect(1150,730,100,40);
@@ -113,14 +121,6 @@ void draw() {
     fill(color(255,255,255));
     text("Map",1160,760);
   }
-  if(countryIndex == 10) {
-  countryIndex = 0;
-  }
-  //selectCountry();
-  Countries.get(countryIndex).behavior();
-  //println(Countries.get(countryIndex).getPercentage());
-  infectOthers(Countries.get(countryIndex));
-  countryIndex++;
   window.addDrawHandler(this, "windowDraw");
 }
 

@@ -30,7 +30,7 @@ public class Country{
     }
   }
  
-  Country(float X,float Y,float sizex, float sizey, String Name,String shapeloc, boolean isInfected){
+  Country(float X,float Y,float sizex, float sizey, String Name,String shapeloc, boolean isInfected, float Pop){
     xpos= X;
     ypos= Y;
     xsize = sizex;
@@ -47,6 +47,7 @@ public class Country{
     if(infected) {
       spread[(spread.length / 2) - 1][(spread[1].length / 2 ) - 1] = 1;
     }
+    population = Pop;
   }
   void setInfected(boolean x){
   infected=x;
