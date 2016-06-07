@@ -11,6 +11,7 @@ public class Country{
   boolean infected=false;
   int rcolor,gcolor,bcolor;
   int immunity; 
+  int strokeweight =1;
  
   Country(float X,float Y, String Name, int numNeighbors, float sizex, float sizey){
     xpos= X;
@@ -61,7 +62,12 @@ public class Country{
     gcolor = int(g);
     bcolor = int(b);
   }
- 
+  
+  void setstroke(int n,int r, int g, int b){
+    strokeweight=n;
+    stroke(color(r,g,b));
+  }
+  
   void greenred(float percent){
     setRGB((255*percent), (255*(1.00-percent)),0);
   }
@@ -70,7 +76,9 @@ public class Country{
   shape(shape, xpos,ypos, xsize, ysize);
   greenred(getPercentage());
   fill(color(rcolor,gcolor,bcolor));
+  strokeWeight(strokeweight);
   }
+  
   void grow() {
   if(infected) {
     if(spread[(spread.length / 2) - 1][(spread[0].length / 2) - 1] == 0) {
