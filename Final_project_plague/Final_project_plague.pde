@@ -20,8 +20,11 @@ int lethality=1;
 int transmissionOut=1;
 int transmissionIn=1;
 boolean started = false;
+int[] deadCountries;
+int wow = 0;
 
 void setup() {
+  deadCountries = new int[10];
   Countries = new ArrayList<Country>();
   size(1300, 800);
   background(color(101,182,222));
@@ -71,6 +74,11 @@ void setup() {
 
 void draw() {
   if(selection==1){
+    if(wow == 10) {
+      background(color(101, 182, 222));
+      text("YOU HAVE TAKEN OVER HUMANITY", 650, 400);
+    }
+    else{
     background(color(101, 182, 222));
     strokeWeight(1);
     stroke(0,0,0);
@@ -99,20 +107,37 @@ void draw() {
     ellipse(700,465,25,25);
     //countryborder();
     //selectCountry();
-  Countries.get(countryIndex).behavior();
-  //println(Countries.get(countryIndex).getPercentage());
-  infectOthers(Countries.get(countryIndex));
-  countryIndex++;
+    if(! (Countries.get(countryIndex).dead)){
+    Countries.get(countryIndex).behavior();
+    //println(Countries.get(countryIndex).getPercentage());
+    infectOthers(Countries.get(countryIndex));
+    }
+    if(Countries.get(countryIndex).dead) {
+      deadCountries[countryIndex] = 1;
+    }
+    int a = 0;
+    for(int i = 0; i < 10; i++) {
+      if(deadCountries[i] == 1) {
+        a++;
+      }
+    }
+    countryIndex++;
     if(countryIndex == 10) {
-  countryIndex = 0;
-    delay(500);
-  }
+      countryIndex = 0;
+    }
+    delay(100);
     textSize(18);
     fill(color(128,128,128));
     rect(1150,730,100,40);
     fill(color(255,255,255));
     text("Upgrades",1160,760);
+    if(a == 10) {
+      wow = a;
+      background(color(101, 182, 222));
+      text("YOU HAVE TAKEN OVER HUMANITY", 650, 400);
   }
+    }
+    }
   if (selection == 2){
     background(color(101, 182, 222));
     upgradescreen();
@@ -130,10 +155,8 @@ void upgradescreen(){
     fill(color(255,255,255));
     text("Transmission in country", 50,50); 
     text("Transmission in Animals", 50,200); 
-    text("Letality", 50,350);
     text("Level:"+transmissionIn,800,50);
     text("Level:"+transmissionOut,800,200);
-    text("Level:"+lethality,800,350);
     fill (color (0,128,255));
     rect(50,70,170,50);
     if (transmissionIn == 1){
@@ -198,40 +221,8 @@ void upgradescreen(){
     else {
       fill (color (128,128,128));
     }
-    rect(650,70+150,170,50);
-    
+    rect(650,70+150,170,50);  
     fill (color (0,128,255));
-    rect(50,370,170,50);
-    if (lethality == 1){
-      fill(color(102,255,102));
-    }
-    else if(lethality > 1){
-      fill (color(0,128,255));
-    }
-    else {
-      fill (color (128,128,128));
-    }
-    rect(250,370,170,50);
-    if (lethality == 2){
-      fill(color(102,255,102));
-    }
-    else if(lethality > 2){
-      fill (color(0,128,255));
-    }
-    else {
-      fill (color (128,128,128));
-    }
-    rect(450,370,170,50);
-    if (lethality == 3){
-      fill(color(102,255,102));
-    }
-    else if(lethality > 3){
-      fill (color(0,128,255));
-    }
-    else {
-      fill (color (128,128,128));
-    }
-    rect(650,370,170,50);
 }
 
 void upgradescreenclick(){
@@ -253,6 +244,7 @@ void upgradescreenclick(){
   else if (transmissionOut == 3 && mouseX >= 650 && mouseX <=650+170 && mouseY>=220 && mouseY<=220+50){
     transmissionOut=4;
   }
+  /*
   else if (lethality == 1 && mouseX >= 250 && mouseX <=250+170 && mouseY>=370 && mouseY<=370+50){
     lethality=2;
   }
@@ -262,6 +254,7 @@ void upgradescreenclick(){
   else if (lethality == 3 && mouseX >= 650 && mouseX <=650+170 && mouseY>=370 && mouseY<=370+50){
     lethality=4;
   }
+  */
 }
 
 void infectOthers(Country country) { 

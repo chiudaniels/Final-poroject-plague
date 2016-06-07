@@ -12,6 +12,7 @@ public class Country{
   int rcolor,gcolor,bcolor;
   int immunity; 
   int strokeweight =1;
+  boolean dead = false;
  
   Country(float X,float Y, String Name, int numNeighbors, float sizex, float sizey){
     xpos= X;
@@ -138,7 +139,7 @@ public class Country{
   void decontaminate(int amount) {
   for(int i = 0; i< spread.length; i++) {
     for(int a = 0; a< spread[0].length; a++) {
-      if(spread[i][a] != 0 && spread[i][a] > -10) {
+      if(spread[i][a] != 0 && spread[i][a] > -10 && spread[i][a] < 9) {
         spread[i][a] = spread[i][a] - amount;
       }
     }
@@ -176,7 +177,11 @@ public class Country{
   }
   void behavior() {
     grow();
-    greenred(getPercentage());
+    float percentage = getPercentage();
+    greenred(percentage);
+    if(percentage == 1) {
+      dead = true;
+    }
     //print(getPercentage());
     //display();
     /*
@@ -191,7 +196,9 @@ public class Country{
     float ret = 0;
     for(int i = 0; i < spread.length; i++) {
       for(int a = 0; a < spread[0].length; a++) {
+        if(spread[i][a] >0) {
         ret += spread[i][a];
+        }
       }
     }
     return ret / 1000.0;
