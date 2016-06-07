@@ -74,9 +74,9 @@ public class Country{
   }
    
   void display (){ 
-  shape(shape, xpos,ypos, xsize, ysize);
   greenred(getPercentage());
   fill(color(rcolor,gcolor,bcolor));
+  shape(shape, xpos,ypos, xsize, ysize);
   strokeWeight(strokeweight);
   }
   

@@ -66,7 +66,7 @@ void setup() {
   middleeast.neighbors = middleeastNeighbors;
   russia.neighbors = russiaNeighbors;
   southamerica.neighbors = southamericaNeighbors;
-  window= GWindow.getWindow(this,"My Window",100,100,600,500,JAVA2D);
+  window= GWindow.getWindow(this,"My Window",100,100,600,300,JAVA2D);
 }
 
 void draw() {
@@ -74,6 +74,7 @@ void draw() {
     background(color(101, 182, 222));
     strokeWeight(1);
     stroke(0,0,0);
+    usa.setRGB(255,0,255);
     australia.display();
     usa.display();
     canada.display();
@@ -97,15 +98,15 @@ void draw() {
     ellipse(475,115,25,25);
     ellipse(700,465,25,25);
     //countryborder();
-  if(countryIndex == 10) {
-  countryIndex = 0;
-  }
-  //selectCountry();
+    //selectCountry();
   Countries.get(countryIndex).behavior();
   //println(Countries.get(countryIndex).getPercentage());
   infectOthers(Countries.get(countryIndex));
   countryIndex++;
+    if(countryIndex == 10) {
+  countryIndex = 0;
     delay(500);
+  }
     textSize(18);
     fill(color(128,128,128));
     rect(1150,730,100,40);
@@ -329,63 +330,69 @@ void countryborder(){
 
 public void windowDraw(PApplet app, GWinData data){
   app.background(0);
-  app.fill(255);
-      app.textSize(32);
-      app.text("Area:",50,100);
-      app.text("Infected:",50,150);
-      app.text("Population:",50,200);
-      //app.text("Fatality:",50,250);
-      switch(selectedCountry){
-      case 1: 
-        app.text(australia.getName(),150,100);
-        app.text(australia.getInfected(),200,150);
-        app.text(australia.getPercentage(),250,200);
-        break;
-      case 2: 
-        app.text(usa.getName(),150,100);
-        app.text(usa.getInfected(),200,150);
-        app.text(usa.getPopulation(),250,200);
-        break;
-      case 3:
-        app.text(canada.getName(),150,100);
-        app.text(canada.getInfected(),200,150);
-        app.text(canada.getPopulation(),250,200);
-        break;
-      case 4:
-       app.text(fareast.getName(),150,100);
-        app.text(fareast.getInfected(),200,150);
-        app.text(fareast.getPopulation(),250,200);
-        break;
-      case 5:
-       app.text(europe.getName(),150,100);
-        app.text(europe.getInfected(),200,150);
-        app.text(europe.getPopulation(),250,200);
-        break;
-      case 6:
-        app.text(greenland.getName(),150,100);
-        app.text(greenland.getInfected(),200,150);
-        app.text(greenland.getPopulation(),250,200);
-        break;
-      case 7:
-        app.text(africa.getName(),150,100);
-        app.text(africa.getInfected(),200,150);
-        app.text(africa.getPopulation(),250,200);
-        break;
-      case 8:
-       app.text(middleeast.getName(),150,100);
-        app.text(middleeast.getInfected(),200,150);
-        app.text(middleeast.getPopulation(),250,200);
-        break;
-      case 9:
-        app.text(russia.getName(),150,100);
-        app.text(russia.getInfected(),200,150);
-        app.text(russia.getPopulation(),250,200);
-        break;
-      case 10:
-        app.text(southamerica.getName(),150,100);
-        app.text(southamerica.getInfected(),200,150);
-        app.text(southamerica.getPopulation(),250,200);
-        break;
+  if (!started){
+    app.textSize(48);
+    app.text("Please select an area",50,150);
+  }
+  else{
+    app.fill(255);
+        app.textSize(32);
+        app.text("Area:",50,100);
+        app.text("Infected:",50,150);
+        app.text("Population:",50,200);
+        //app.text("Fatality:",50,250);
+        switch(selectedCountry){
+        case 1: 
+          app.text(australia.getName(),150,100);
+          app.text(australia.getInfected(),200,150);
+          app.text(australia.getPopulation(),250,200);
+          break;
+        case 2: 
+          app.text(usa.getName(),150,100);
+          app.text(usa.getInfected(),200,150);
+          app.text(usa.getPopulation(),250,200);
+          break;
+        case 3:
+          app.text(canada.getName(),150,100);
+          app.text(canada.getInfected(),200,150);
+          app.text(canada.getPopulation(),250,200);
+          break;
+        case 4:
+         app.text(fareast.getName(),150,100);
+          app.text(fareast.getInfected(),200,150);
+          app.text(fareast.getPopulation(),250,200);
+          break;
+        case 5:
+         app.text(europe.getName(),150,100);
+          app.text(europe.getInfected(),200,150);
+          app.text(europe.getPopulation(),250,200);
+          break;
+        case 6:
+          app.text(greenland.getName(),150,100);
+          app.text(greenland.getInfected(),200,150);
+          app.text(greenland.getPopulation(),250,200);
+          break;
+        case 7:
+          app.text(africa.getName(),150,100);
+          app.text(africa.getInfected(),200,150);
+          app.text(africa.getPopulation(),250,200);
+          break;
+        case 8:
+         app.text(middleeast.getName(),150,100);
+          app.text(middleeast.getInfected(),200,150);
+          app.text(middleeast.getPopulation(),250,200);
+          break;
+        case 9:
+          app.text(russia.getName(),150,100);
+          app.text(russia.getInfected(),200,150);
+          app.text(russia.getPopulation(),250,200);
+          break;
+        case 10:
+          app.text(southamerica.getName(),150,100);
+          app.text(southamerica.getInfected(),200,150);
+          app.text(southamerica.getPopulation(),250,200);
+          break;
+    }
   }
 }
 
