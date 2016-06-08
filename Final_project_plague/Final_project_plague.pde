@@ -22,6 +22,7 @@ int transmissionIn=1;
 boolean started = false;
 int[] deadCountries;
 int wow = 0;
+PImage photo;
 
 void setup() {
   deadCountries = new int[10];
@@ -70,13 +71,15 @@ void setup() {
   russia.neighbors = russiaNeighbors;
   southamerica.neighbors = southamericaNeighbors;
   window= GWindow.getWindow(this,"My Window",100,100,600,300,JAVA2D);
+  photo = loadImage("YouWin.png");
 }
 
 void draw() {
   if(selection==1){
     if(wow == 10) {
-      background(color(101, 182, 222));
+      background(color(0,0,0));
       text("YOU HAVE TAKEN OVER HUMANITY", 650, 400);
+      image(photo, 0, 0, 1300, 800);
     }
     else{
     background(color(101, 182, 222));

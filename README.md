@@ -4,6 +4,7 @@ Project Description:
 To create a plague/plandemic game, where given a world map, the player can try to infect and kill off the human race with a disease he/she creates. 
 
 Directions: 
+Import the library G4P
 
 Our game is a knockoff version of Plague. The controls are pretty simple, as the player doesn't really have much to do, other than choose where to start the disease, and whenever he wants, he can upgrade the disease.
 
